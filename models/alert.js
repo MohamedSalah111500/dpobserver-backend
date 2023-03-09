@@ -21,6 +21,12 @@ const Alert = dbModule.connection.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    description: {
+      type: DataTypes.STRING,
+    },
+    drivePattern: {
+      type: DataTypes.JSON,
+    },
     driverId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -42,4 +48,6 @@ Alert.belongsTo(Driver, {
 Driver.hasMany(Alert, {
   foreignKey: "driverId",
 });
+
+
 module.exports = Alert;

@@ -4,10 +4,9 @@ const app = express();
 const dbModule = require("./utils/database");
 const bodyParser = require("body-parser");
 const driversRouts = require("./routes/drivers");
+const carsRouts = require("./routes/cars");
 const usersRouts = require("./routes/users");
 const alertsRouts = require("./routes/alerts");
-const Alert = require("./models/alert");
-const Driver = require("./models/driver");
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -22,20 +21,20 @@ app.use((req, res, next) => {
   );
   next();
 });
+
 app.use("/driver", driversRouts);
+app.use("/car", carsRouts);
 app.use("/users", usersRouts);
 app.use("/alert", alertsRouts);
+
+
 
 dbModule.connection
   .sync()
   .then((res) => {
-    console.log("sucsess");
-
     console.log(res);
-
     app.listen(8080);
   })
   .catch((err) => {
     console.log(err);
   });
-

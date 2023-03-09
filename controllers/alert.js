@@ -11,6 +11,8 @@ exports.postCreateAlert = (req, res, next) => {
     driverId,
     carId,
     dangerPercentage,
+    description,
+    drivePattern
   } = req.body;
   Alert.create({
     label,
@@ -20,6 +22,8 @@ exports.postCreateAlert = (req, res, next) => {
     driverId,
     carId,
     dangerPercentage,
+    description,
+    drivePattern
   })
     .then((response) => {
       res

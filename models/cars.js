@@ -1,44 +1,38 @@
 const dbModule = require("../utils/database");
 const { DataTypes } = require("sequelize");
+const Driver = require("./driver");
+const Alert = require("./alert");
 
-const Driver = dbModule.connection.define(
-  "drivers",
+const Car = dbModule.connection.define(
+  "cars",
   {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    phone: {
-      type: DataTypes.STRING,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    licenseType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    dateOfBirth: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    address: {
+    type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     image: {
       type: DataTypes.STRING,
     },
+    model: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    version: {
+      type: DataTypes.STRING,
+    },
     driverId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-
     },
-    
   },
   {}
 );
 
+Alert.belongsTo(Car, {
+  foreignKey: "carId",
+});
 
-module.exports = Driver;
+Car.hasMany(Alert, {
+  foreignKey: "carId",
+});
+module.exports = Car;
